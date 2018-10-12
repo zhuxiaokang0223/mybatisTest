@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 导入属性配置 -->
+    <properties resource="config/generator.properties"></properties>
+    <!-- mybatis 配置-->
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+        <!--生成代码时，祛除自动生成的注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+
+        <!--配置数据库连接-->
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}" password="${jdbc.password}"/>
+
+        <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+        <javaModelGenerator targetPackage="com.mybatis.generator.model" targetProject="src/main/java">
+            <!-- 是否允许生成子包，如果true，MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性。默认为false。 -->
+            <property name="enableSubPackages" value="false"/>
+            <!--constructorBased:该属性只对MyBatis3有效，如果true就会使用构造方法入参，如果false就会使用setter方式。默认为false-->
+            <!--<property name="constructorBased" value="false" />-->
+            <!--该属性用来配置实体类属性是否可变，如果设置为true，那么constructorBased不管设置成什么，都会使用构造方法入参，并且不会生成setter方法。如果为false，实体类属性就可以改变。默认为false。-->
+            <!--<property name="constructorBased" value="false" />-->
+            <!--trimStrings:是否对数据库查询结果进行trim操作，如果设置为true就会生成类似这样public void setUsername(String username) {this.username = username == null ? null : username.trim();}的setter方法。默认值为false。-->
+            <!--<property name="constructorBased" value="false" />-->
+        </javaModelGenerator>
+
+        <!--对应的xml mapper文件  -->
+        <sqlMapGenerator targetPackage="com.mybatis.generator.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 对应的dao接口 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.generator.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--要自动生成的表-->
+        <table tableName="t_table_name" domainObjectName="TableName" /> 
+
+    </context>
+</generatorConfiguration>

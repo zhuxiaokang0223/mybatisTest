@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.generator.dao.userInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.generator.model.userInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_area_code" jdbcType="CHAR" property="userAreaCode" />
+    <result column="user_type" jdbcType="TINYINT" property="userType" />
+    <result column="user_name" jdbcType="CHAR" property="userName" />
+    <result column="phone_num" jdbcType="CHAR" property="phoneNum" />
+    <result column="user_key" jdbcType="CHAR" property="userKey" />
+    <result column="token" jdbcType="CHAR" property="token" />
+    <result column="token_validity" jdbcType="INTEGER" property="tokenValidity" />
+    <result column="issubaccountset" jdbcType="INTEGER" property="issubaccountset" />
+    <result column="register_time" jdbcType="INTEGER" property="registerTime" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="user_open_id" jdbcType="VARCHAR" property="userOpenId" />
+    <result column="carousel_period" jdbcType="INTEGER" property="carouselPeriod" />
+    <result column="carousel_status" jdbcType="INTEGER" property="carouselStatus" />
+    <result column="isupgradetoandid" jdbcType="INTEGER" property="isupgradetoandid" />
+    <result column="isassociatetoandid" jdbcType="INTEGER" property="isassociatetoandid" />
+    <result column="passid" jdbcType="VARCHAR" property="passid" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="secret_level" jdbcType="INTEGER" property="secretLevel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, user_area_code, user_type, user_name, phone_num, user_key, token, token_validity, 
+    issubaccountset, register_time, status, user_open_id, carousel_period, carousel_status, 
+    isupgradetoandid, isassociatetoandid, passid, avatar, nick_name, secret_level
+  </sql>
+  <select id="selectByExample" parameterType="com.mybatis.generator.model.userInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mybatis.generator.model.userInfoExample">
+    delete from t_user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.generator.model.userInfo">
+    insert into t_user_info (id, user_id, user_area_code, 
+      user_type, user_name, phone_num, 
+      user_key, token, token_validity, 
+      issubaccountset, register_time, status, 
+      user_open_id, carousel_period, carousel_status, 
+      isupgradetoandid, isassociatetoandid, passid, 
+      avatar, nick_name, secret_level
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userAreaCode,jdbcType=CHAR}, 
+      #{userType,jdbcType=TINYINT}, #{userName,jdbcType=CHAR}, #{phoneNum,jdbcType=CHAR}, 
+      #{userKey,jdbcType=CHAR}, #{token,jdbcType=CHAR}, #{tokenValidity,jdbcType=INTEGER}, 
+      #{issubaccountset,jdbcType=INTEGER}, #{registerTime,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{userOpenId,jdbcType=VARCHAR}, #{carouselPeriod,jdbcType=INTEGER}, #{carouselStatus,jdbcType=INTEGER}, 
+      #{isupgradetoandid,jdbcType=INTEGER}, #{isassociatetoandid,jdbcType=INTEGER}, #{passid,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{secretLevel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.generator.model.userInfo">
+    insert into t_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userAreaCode != null">
+        user_area_code,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="userKey != null">
+        user_key,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="tokenValidity != null">
+        token_validity,
+      </if>
+      <if test="issubaccountset != null">
+        issubaccountset,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="userOpenId != null">
+        user_open_id,
+      </if>
+      <if test="carouselPeriod != null">
+        carousel_period,
+      </if>
+      <if test="carouselStatus != null">
+        carousel_status,
+      </if>
+      <if test="isupgradetoandid != null">
+        isupgradetoandid,
+      </if>
+      <if test="isassociatetoandid != null">
+        isassociatetoandid,
+      </if>
+      <if test="passid != null">
+        passid,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="secretLevel != null">
+        secret_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAreaCode != null">
+        #{userAreaCode,jdbcType=CHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=CHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=CHAR},
+      </if>
+      <if test="userKey != null">
+        #{userKey,jdbcType=CHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=CHAR},
+      </if>
+      <if test="tokenValidity != null">
+        #{tokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="issubaccountset != null">
+        #{issubaccountset,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="userOpenId != null">
+        #{userOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="carouselPeriod != null">
+        #{carouselPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="carouselStatus != null">
+        #{carouselStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isupgradetoandid != null">
+        #{isupgradetoandid,jdbcType=INTEGER},
+      </if>
+      <if test="isassociatetoandid != null">
+        #{isassociatetoandid,jdbcType=INTEGER},
+      </if>
+      <if test="passid != null">
+        #{passid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="secretLevel != null">
+        #{secretLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mybatis.generator.model.userInfoExample" resultType="java.lang.Long">
+    select count(*) from t_user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_user_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAreaCode != null">
+        user_area_code = #{record.userAreaCode,jdbcType=CHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=TINYINT},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=CHAR},
+      </if>
+      <if test="record.phoneNum != null">
+        phone_num = #{record.phoneNum,jdbcType=CHAR},
+      </if>
+      <if test="record.userKey != null">
+        user_key = #{record.userKey,jdbcType=CHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=CHAR},
+      </if>
+      <if test="record.tokenValidity != null">
+        token_validity = #{record.tokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="record.issubaccountset != null">
+        issubaccountset = #{record.issubaccountset,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerTime != null">
+        register_time = #{record.registerTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.userOpenId != null">
+        user_open_id = #{record.userOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carouselPeriod != null">
+        carousel_period = #{record.carouselPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.carouselStatus != null">
+        carousel_status = #{record.carouselStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.isupgradetoandid != null">
+        isupgradetoandid = #{record.isupgradetoandid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isassociatetoandid != null">
+        isassociatetoandid = #{record.isassociatetoandid,jdbcType=INTEGER},
+      </if>
+      <if test="record.passid != null">
+        passid = #{record.passid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secretLevel != null">
+        secret_level = #{record.secretLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_user_info
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_area_code = #{record.userAreaCode,jdbcType=CHAR},
+      user_type = #{record.userType,jdbcType=TINYINT},
+      user_name = #{record.userName,jdbcType=CHAR},
+      phone_num = #{record.phoneNum,jdbcType=CHAR},
+      user_key = #{record.userKey,jdbcType=CHAR},
+      token = #{record.token,jdbcType=CHAR},
+      token_validity = #{record.tokenValidity,jdbcType=INTEGER},
+      issubaccountset = #{record.issubaccountset,jdbcType=INTEGER},
+      register_time = #{record.registerTime,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      user_open_id = #{record.userOpenId,jdbcType=VARCHAR},
+      carousel_period = #{record.carouselPeriod,jdbcType=INTEGER},
+      carousel_status = #{record.carouselStatus,jdbcType=INTEGER},
+      isupgradetoandid = #{record.isupgradetoandid,jdbcType=INTEGER},
+      isassociatetoandid = #{record.isassociatetoandid,jdbcType=INTEGER},
+      passid = #{record.passid,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      secret_level = #{record.secretLevel,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.generator.model.userInfo">
+    update t_user_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAreaCode != null">
+        user_area_code = #{userAreaCode,jdbcType=CHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=CHAR},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=CHAR},
+      </if>
+      <if test="userKey != null">
+        user_key = #{userKey,jdbcType=CHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=CHAR},
+      </if>
+      <if test="tokenValidity != null">
+        token_validity = #{tokenValidity,jdbcType=INTEGER},
+      </if>
+      <if test="issubaccountset != null">
+        issubaccountset = #{issubaccountset,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="userOpenId != null">
+        user_open_id = #{userOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="carouselPeriod != null">
+        carousel_period = #{carouselPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="carouselStatus != null">
+        carousel_status = #{carouselStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isupgradetoandid != null">
+        isupgradetoandid = #{isupgradetoandid,jdbcType=INTEGER},
+      </if>
+      <if test="isassociatetoandid != null">
+        isassociatetoandid = #{isassociatetoandid,jdbcType=INTEGER},
+      </if>
+      <if test="passid != null">
+        passid = #{passid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="secretLevel != null">
+        secret_level = #{secretLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.generator.model.userInfo">
+    update t_user_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_area_code = #{userAreaCode,jdbcType=CHAR},
+      user_type = #{userType,jdbcType=TINYINT},
+      user_name = #{userName,jdbcType=CHAR},
+      phone_num = #{phoneNum,jdbcType=CHAR},
+      user_key = #{userKey,jdbcType=CHAR},
+      token = #{token,jdbcType=CHAR},
+      token_validity = #{tokenValidity,jdbcType=INTEGER},
+      issubaccountset = #{issubaccountset,jdbcType=INTEGER},
+      register_time = #{registerTime,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      user_open_id = #{userOpenId,jdbcType=VARCHAR},
+      carousel_period = #{carouselPeriod,jdbcType=INTEGER},
+      carousel_status = #{carouselStatus,jdbcType=INTEGER},
+      isupgradetoandid = #{isupgradetoandid,jdbcType=INTEGER},
+      isassociatetoandid = #{isassociatetoandid,jdbcType=INTEGER},
+      passid = #{passid,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      secret_level = #{secretLevel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
